@@ -27,16 +27,16 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "build.maven" }}
+            - v1-dependencies-{{ checksum "build.gradle" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: maven dependencies
+      - run: gradle dependencies
 
       - save_cache:
           paths:
-            - ~/.maven
-          key: v1-dependencies-{{ checksum "build.maven" }}
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
 
       # run tests!
-      - run: maven test
+      - run: gradle test
