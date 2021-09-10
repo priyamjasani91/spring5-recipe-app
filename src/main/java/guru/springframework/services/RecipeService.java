@@ -6,6 +6,7 @@ import java.util.Set;
 
 public interface RecipeService {
 
-    Set<Recipe> getReipes();
+    Set<Recipe> getRecipes();
 
+    Recipe findById(Long l);
 }

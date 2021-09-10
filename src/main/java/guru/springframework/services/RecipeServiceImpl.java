@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Provider;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Slf4j
@@ -19,10 +20,25 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Set<Recipe> getReipes() {
-        log.debug("I'm in the Service");
+    public Set<Recipe> getRecipes() {
+        log.debug("I'm in the ServiceImpl");
         Set<Recipe> recipeSet = new HashSet<>();
         recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
         return recipeSet;
     }
+    @Override
+    public Recipe findById(Long l) {
+
+        Optional<Recipe> recipeOptional = recipeRepository.findById(l);
+
+        if (!recipeOptional.isPresent()) {
+            throw new RuntimeException("Recipe Not Found!");
+        }
+
+        return recipeOptional.get();
+    }
+    /*@Override
+    public Recipe findById(Long l) {
+        return null;
+    }*/
 }
